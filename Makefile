@@ -1,0 +1,39 @@
+IMAGE_NAME=educase_backend
+CONTAINER_NAME=educase_backend
+PORT=3000
+DOCKERFILE_PATH=infrastructure/Dockerfile
+BUILD_CONTEXT=.
+DOCKER_USERNAME=vectorx13
+DOCKER_REPO=educase_backend
+
+all: build run
+
+build:
+	@echo "Building docker image..."
+	docker build -t ${IMAGE_NAME} -f ${DOCKERFILE_PATH} ${BUILD_CONTEXT}
+
+stop:
+	@echo "Stopping existing container..."
+	docker stop $(CONTAINER_NAME) || true
+	docker rm $(CONTAINER_NAME) || true
+	docker compose -f infrastructure/docker_compose.yml down
+
+run:
+	@echo "Running docker container"
+	docker run -d \
+		--name $(CONTAINER_NAME) \
+		-p $(PORT):3000 \
+		$(IMAGE_NAME)
+	docker compose -f infrastructure/docker_compose.yml up -d
+
+push:
+	@echo "Tagging Docker image..."
+	docker tag $(IMAGE_NAME) $(DOCKER_USERNAME)/$(DOCKER_REPO):latest
+	@echo "Pushing Docker image to Docker Hub..."
+	docker push $(DOCKER_USERNAME)/$(DOCKER_REPO):latest
+
+clean: stop
+	@echo "Removing Docker image..."
+	docker rmi $(IMAGE_NAME) || true
+
+.PHONY: all build stop run push clean
