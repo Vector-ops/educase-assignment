@@ -29,4 +29,4 @@ uploads
 infrastructure/terraform/.terraform
 infrastructure/terraform/.terraform.*
 infrastructure/terraform/terraform.*
-docker-volumes
+docker_volumes
