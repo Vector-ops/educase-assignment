@@ -43,10 +43,7 @@ const logger = createLogger({
 
 const morganLogger = createLogger({
 	level: "info",
-	format: format.combine(
-		format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
-		morganLogFormat
-	),
+	format: format.combine(format.colorize(), format.simple()),
 	transports: [morganRotateTransport, new transports.Console()],
 });
 
