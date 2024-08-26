@@ -16,7 +16,7 @@ stop:
 	@echo "Stopping existing container..."
 	docker stop $(CONTAINER_NAME) || true
 	docker rm $(CONTAINER_NAME) || true
-	docker compose -f infrastructure/docker_compose.yml down
+	docker compose -f infrastructure/docker-compose.yml down
 
 run:
 	@echo "Running docker container"
@@ -24,7 +24,7 @@ run:
 		--name $(CONTAINER_NAME) \
 		-p $(PORT):3000 \
 		$(IMAGE_NAME)
-	docker compose -f infrastructure/docker_compose.yml up -d
+	docker compose -f infrastructure/docker-compose.yml up -d
 
 push:
 	@echo "Tagging Docker image..."
@@ -35,5 +35,6 @@ push:
 clean: stop
 	@echo "Removing Docker image..."
 	docker rmi $(IMAGE_NAME) || true
+
 
 .PHONY: all build stop run push clean
