@@ -1,0 +1,14 @@
+services:
+    mysql:
+        container_name: educase_mysql
+        image: mysql:latest
+        restart: always
+        environment:
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+            - MYSQL_DATABASE=${MYSQL_DB}
+            - MYSQL_USER=${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        ports:
+            - 3306:3306
+        volumes:
+            - ./docker_volumes/mysql:/var/lib/mysql
