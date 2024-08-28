@@ -80,7 +80,7 @@ _**Tests for both local and EC2 deployed API are available on the postman collec
 3. In the `Body` tab, select `JSON` and use the payload above to add a new school.
 4. Send the request and check the response to ensure that the data is uploaded to the database.
 
-### Local Testing
+### Local Testing ONLY
 
 1. Clone the repository:
 
