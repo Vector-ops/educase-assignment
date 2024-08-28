@@ -32,6 +32,8 @@ This project is a Node.js backend application which provides endpoints to add ne
 
 _**Tests for both local and EC2 deployed API are available on the postman collection**_
 
+[<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://god.gw.postman.com/run-collection/37913243-62e003b6-62de-49b0-b37c-cee00ac299b6?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D37913243-62e003b6-62de-49b0-b37c-cee00ac299b6%26entityType%3Dcollection%26workspaceId%3D4cd05732-5e62-4608-b89c-0b9b95e20272)
+
 ### For EC2 deployed testing ONLY
 
 **Health Check Endpoint**
