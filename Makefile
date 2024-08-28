@@ -8,23 +8,17 @@ DOCKER_REPO=educase_backend
 
 all: build run
 
-build:
-	@echo "Building docker image..."
-	docker build -t ${IMAGE_NAME} -f ${DOCKERFILE_PATH} ${BUILD_CONTEXT}
+start: build-node
+		npm run start
+
+build-node:
+		npm run build
 
 stop:
-	@echo "Stopping existing container..."
-	docker stop $(CONTAINER_NAME) || true
-	docker rm $(CONTAINER_NAME) || true
-	docker compose -f infrastructure/docker-compose.yml down
+	docker compose down
 
 run:
-	@echo "Running docker container"
-	docker run -d \
-		--name $(CONTAINER_NAME) \
-		-p $(PORT):3000 \
-		$(IMAGE_NAME)
-	docker compose -f infrastructure/docker-compose.yml up -d
+	docker compose up
 
 push:
 	@echo "Tagging Docker image..."
