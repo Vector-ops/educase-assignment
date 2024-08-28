@@ -3,7 +3,7 @@ import {
 	ListSchoolParams,
 	ValidatedData,
 	ValidatedParams,
-} from "@/types";
+} from "../types";
 
 export const validateAddSchoolData = ({
 	name,

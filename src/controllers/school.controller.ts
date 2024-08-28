@@ -1,15 +1,18 @@
-import prisma from "@/lib/prisma";
+import { NextFunction, Request, Response } from "express";
+import createHttpError from "http-errors";
+import prisma from "../lib/prisma";
 import {
 	AddSchoolData,
 	ListSchoolParams,
 	SchoolDataWithDistance,
 	ValidatedData,
 	ValidatedParams,
-} from "@/types";
-import { logger } from "@/utils/logger";
-import { validateAddSchoolData, validateSchoolParams } from "@/utils/validator";
-import { NextFunction, Request, Response } from "express";
-import createHttpError from "http-errors";
+} from "../types";
+import { logger } from "../utils/logger";
+import {
+	validateAddSchoolData,
+	validateSchoolParams,
+} from "../utils/validator";
 
 /**
  * @desc Add new school
@@ -69,7 +72,7 @@ export const listSchools = async (
 	next: NextFunction
 ) => {
 	try {
-		const { lat, lon, dis } = req.query;
+		const { lat, lon, dis, page, count } = req.query;
 
 		const { latitude, longitude, distance, errors }: ValidatedParams =
 			validateSchoolParams({
@@ -81,6 +84,9 @@ export const listSchools = async (
 		if (errors.length > 0) {
 			return next(createHttpError.BadRequest(errors[0]));
 		}
+
+		let pageNo = page ? parseInt(page as string) : 1;
+		let itemCount = count ? parseInt(count as string) : 10;
 
 		const schools: SchoolDataWithDistance[] = await prisma.$queryRaw<
 			SchoolDataWithDistance[]
@@ -97,7 +103,7 @@ FROM (
 ) AS calculated_distances
 WHERE distance <= ${distance}
 ORDER BY distance ASC
-LIMIT 10;
+LIMIT ${pageNo * itemCount};
 
 `;
 
