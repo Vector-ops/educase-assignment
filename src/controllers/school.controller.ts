@@ -8,7 +8,6 @@ import {
 	ValidatedData,
 	ValidatedParams,
 } from "../types";
-import { logger } from "../utils/logger";
 import {
 	validateAddSchoolData,
 	validateSchoolParams,
@@ -58,7 +57,6 @@ export const addSchool = async (
 
 		return res.status(201).json({ message: "School added successfully." });
 	} catch (error) {
-		logger.error(error);
 		console.error(error);
 		return next(
 			createHttpError.InternalServerError("Failed to add school")
@@ -115,7 +113,6 @@ LIMIT ${pageNo * itemCount};
 			schools,
 		});
 	} catch (error) {
-		logger.error(error);
 		console.error(error);
 		return next(
 			createHttpError.InternalServerError("Failed to get schools.")
