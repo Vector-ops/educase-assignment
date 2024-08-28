@@ -6,7 +6,7 @@
 		"seed": "ts-node ./prisma/seed.ts"
 	},
 	"scripts": {
-		"start": "node dist/app.js",
+		"start": "node dist/src/app.js",
 		"dev": "tsx watch --clear-screen=false src/app.ts",
 		"build": "tsc",
 		"prebuild": "npm run clean",
