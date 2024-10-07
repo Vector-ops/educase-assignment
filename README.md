@@ -1,4 +1,4 @@
-# Educase Assignment
+# School Location API
 
 ## Overview
 
